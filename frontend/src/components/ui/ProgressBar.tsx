@@ -8,7 +8,9 @@ export interface ProgressBarProps {
   max?: number
   className?: string
   barClassName?: string
+  trackClassName?: string
   color?: 'primary' | 'violet' | 'success' | 'warning'
+  gradient?: string
 }
 
 const colorClasses = {
@@ -23,7 +25,9 @@ export function ProgressBar({
   max = 100,
   className,
   barClassName,
+  trackClassName,
   color = 'primary',
+  gradient,
 }: ProgressBarProps): ReactElement {
   const percent = Math.min(Math.max((value / max) * 100, 0), 100)
   return (
@@ -34,6 +38,7 @@ export function ProgressBar({
       aria-valuemax={100}
       className={cn(
         'h-1.5 w-full overflow-hidden rounded-full bg-white/8',
+        trackClassName,
         className,
       )}
     >
@@ -42,7 +47,12 @@ export function ProgressBar({
         whileInView={{ width: `${percent}%` }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={cn('h-full rounded-full', colorClasses[color], barClassName)}
+        style={gradient ? { background: gradient } : undefined}
+        className={cn(
+          'h-full rounded-full',
+          gradient ? undefined : colorClasses[color],
+          barClassName,
+        )}
       />
     </div>
   )
