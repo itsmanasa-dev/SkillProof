@@ -1,21 +1,27 @@
 import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
 
+import { cn } from '@/lib/cn'
+
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
+  interactive?: boolean
 }
 
 export function Card({
   className = '',
+  interactive = false,
   children,
   ...props
 }: CardProps): ReactElement {
-  const classes = [
-    'rounded-lg border border-border bg-surface text-foreground shadow-sm',
-    className,
-  ].join(' ')
-
   return (
-    <div className={classes} {...props}>
+    <div
+      className={cn(
+        'card-gradient rounded-xl border border-border text-foreground shadow-soft',
+        interactive && 'card-hover',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </div>
   )
@@ -27,7 +33,7 @@ export function CardHeader({
   ...props
 }: CardProps): ReactElement {
   return (
-    <div className={`flex flex-col gap-1 p-6 ${className}`} {...props}>
+    <div className={cn('flex flex-col gap-1 p-6 pb-3', className)} {...props}>
       {children}
     </div>
   )
@@ -40,7 +46,7 @@ export function CardTitle({
 }: CardProps): ReactElement {
   return (
     <h3
-      className={`text-lg font-semibold tracking-tight ${className}`}
+      className={cn('text-base font-semibold tracking-tight', className)}
       {...props}
     >
       {children}
@@ -54,7 +60,7 @@ export function CardDescription({
   ...props
 }: CardProps): ReactElement {
   return (
-    <p className={`text-sm text-muted-foreground ${className}`} {...props}>
+    <p className={cn('text-sm text-muted', className)} {...props}>
       {children}
     </p>
   )
@@ -66,7 +72,7 @@ export function CardContent({
   ...props
 }: CardProps): ReactElement {
   return (
-    <div className={`p-6 pt-0 ${className}`} {...props}>
+    <div className={cn('p-6 pt-3', className)} {...props}>
       {children}
     </div>
   )
