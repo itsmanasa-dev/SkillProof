@@ -6,8 +6,8 @@ export function useTimer(initialSeconds: number, running: boolean): number {
   const doneRef = useRef(false)
 
   useEffect(() => {
-    setSeconds(initialSeconds)
     doneRef.current = false
+    queueMicrotask(() => setSeconds(initialSeconds))
   }, [initialSeconds])
 
   useEffect(() => {

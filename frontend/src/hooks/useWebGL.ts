@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 type WebGLStatus = 'checking' | 'available' | 'unavailable'
 
@@ -14,12 +14,10 @@ function detectWebGL(): boolean {
 }
 
 export function useWebGL(): WebGLStatus {
-  const [status, setStatus] = useState<WebGLStatus>('checking')
-
-  useEffect(() => {
-    const available = detectWebGL()
-    setStatus(available ? 'available' : 'unavailable')
-  }, [])
+  const [status] = useState<WebGLStatus>(() => {
+    if (typeof window === 'undefined') return 'checking'
+    return detectWebGL() ? 'available' : 'unavailable'
+  })
 
   return status
 }
