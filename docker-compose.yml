@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: skillproof-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: skillproof
+      POSTGRES_PASSWORD: skillproof
+      POSTGRES_DB: skillproof
+    ports:
+      - "5432:5432"
+    volumes:
+      - skillproof_db_data:/var/lib/postgresql/data
+
+volumes:
+  skillproof_db_data:

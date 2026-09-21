@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --sp-bg: #fafafa;
+  --sp-surface: #ffffff;
+  --sp-foreground: #18181b;
+  --sp-muted: #71717a;
+  --sp-muted-foreground: #71717a;
+  --sp-border: #e4e4e7;
+  --sp-primary: #4f46e5;
+  --sp-primary-hover: #4338ca;
+  --sp-primary-foreground: #ffffff;
+  --sp-secondary: #f4f4f5;
+  --sp-secondary-foreground: #18181b;
+  --sp-destructive: #dc2626;
+  --sp-destructive-foreground: #ffffff;
+  --sp-ring: rgba(79, 70, 229, 0.4);
+}
+
+.dark {
+  --sp-bg: #09090b;
+  --sp-surface: #18181b;
+  --sp-foreground: #fafafa;
+  --sp-muted: #a1a1aa;
+  --sp-muted-foreground: #a1a1aa;
+  --sp-border: #27272a;
+  --sp-primary: #818cf8;
+  --sp-primary-hover: #6366f1;
+  --sp-primary-foreground: #09090b;
+  --sp-secondary: #27272a;
+  --sp-secondary-foreground: #fafafa;
+  --sp-destructive: #ef4444;
+  --sp-destructive-foreground: #ffffff;
+  --sp-ring: rgba(129, 140, 248, 0.4);
+}
+
+@theme inline {
+  --color-background: var(--sp-bg);
+  --color-surface: var(--sp-surface);
+  --color-foreground: var(--sp-foreground);
+  --color-muted: var(--sp-muted);
+  --color-muted-foreground: var(--sp-muted-foreground);
+  --color-border: var(--sp-border);
+  --color-primary: var(--sp-primary);
+  --color-primary-hover: var(--sp-primary-hover);
+  --color-primary-foreground: var(--sp-primary-foreground);
+  --color-secondary: var(--sp-secondary);
+  --color-secondary-foreground: var(--sp-secondary-foreground);
+  --color-destructive: var(--sp-destructive);
+  --color-destructive-foreground: var(--sp-destructive-foreground);
+  --color-ring: var(--sp-ring);
+
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, 'Roboto Mono', monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-fade-in-up: fade-in-up 0.3s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--sp-bg);
+  color: var(--sp-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

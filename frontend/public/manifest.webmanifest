@@ -1,0 +1,16 @@
+{
+  "name": "SkillProof Frontend",
+  "short_name": "SkillProof",
+  "description": "AI-powered practical skill verification platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
