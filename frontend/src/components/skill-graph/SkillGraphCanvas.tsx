@@ -52,7 +52,6 @@ export function SkillGraphCanvas({
         hoveredId={hoveredId}
         onHover={setHoveredId}
         onSelect={handleSelect}
-        autoRotate={autoRotate}
         interactive={interactive}
       />
       <OrbitControls

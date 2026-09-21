@@ -1,11 +1,11 @@
-import type { ReactElement, SVGProps } from 'react'
+import type { ReactElement, ReactNode, SVGProps } from 'react'
 
 type IconProps = SVGProps<SVGSVGElement>
 
 function Base({
   children,
   ...props
-}: IconProps & { children: ReactElement }): ReactElement {
+}: IconProps & { children: ReactNode }): ReactElement {
   return (
     <svg
       viewBox="0 0 24 24"

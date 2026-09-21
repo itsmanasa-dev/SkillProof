@@ -9,7 +9,6 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { formatTime, useTimer } from '@/hooks/useTimer'
 import { getChallengeById } from '@/data/mockChallenges'
-import '@/monaco'
 
 interface TestResult {
   id: number

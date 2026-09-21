@@ -11,7 +11,7 @@ export function useCountUp(target: number, duration = 800, start = true): number
       '(prefers-reduced-motion: reduce)',
     ).matches
     if (reduced) {
-      setValue(target)
+      queueMicrotask(() => setValue(target))
       return
     }
 

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(
-    () => window.matchMedia(query).matches,
+  const [matches, setMatches] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.matchMedia(query).matches
+      : false,
   )
 
   useEffect(() => {
@@ -10,7 +12,6 @@ export function useMediaQuery(query: string): boolean {
     const onChange = (event: MediaQueryListEvent): void => {
       setMatches(event.matches)
     }
-    setMatches(mql.matches)
     mql.addEventListener('change', onChange)
     return () => mql.removeEventListener('change', onChange)
   }, [query])
@@ -19,7 +20,7 @@ export function useMediaQuery(query: string): boolean {
 }
 
 export function useIsMobile(): boolean {
-  return useMediaQuery('(max-width: 767px)')
+  return useMediaQuery('(max-width: 640px)')
 }
 
 export function usePrefersReducedMotion(): boolean {

@@ -1,9 +1,5 @@
-import type {
-  ButtonHTMLAttributes,
-  ReactElement,
-  ReactNode,
-} from 'react'
-import { motion } from 'motion/react'
+import type { ReactElement, ReactNode } from 'react'
+import { motion, type HTMLMotionProps } from 'motion/react'
 
 import { cn } from '@/lib/cn'
 
@@ -16,7 +12,8 @@ export type ButtonVariant =
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: ButtonVariant
   size?: ButtonSize
   children: ReactNode

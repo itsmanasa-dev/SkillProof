@@ -12,7 +12,6 @@ export interface StatCardProps {
   trend?: string
   subtitle?: string
   delay?: number
-  className?: string
 }
 
 const accentColors = {
@@ -31,7 +30,6 @@ export function StatCard({
   trend,
   subtitle,
   delay = 0,
-  className,
 }: StatCardProps): ReactElement {
   return (
     <motion.div
@@ -39,7 +37,7 @@ export function StatCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay }}
       className="card-gradient card-hover relative overflow-hidden rounded-xl border border-border p-6"
-     style={{ borderColor: 'var(--sp-border)' }}
+      style={{ borderColor: 'var(--sp-border)' }}
     >
       <div className="relative z-10 flex items-start justify-between">
         <div>

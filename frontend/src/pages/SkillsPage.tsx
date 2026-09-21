@@ -105,7 +105,6 @@ function SkillCard({
         <ProgressBar
           value={skill.confidence}
           trackClassName="bg-white/5"
-          indicatorClassName="bg-white/10"
           gradient={skill.color}
         />
       </div>

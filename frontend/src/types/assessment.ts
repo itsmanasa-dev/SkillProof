@@ -1,5 +1,3 @@
-import type { SkillLevel } from './skill'
-
 export type AssessmentDifficulty = 'Beginner' | 'Intermediate' | 'Advanced'
 
 export type AssessmentKind =

@@ -98,9 +98,9 @@ export function DashboardPage(): ReactElement {
                 <p className="text-base font-medium tracking-tight text-foreground">
                   {nextChallenge.title}
                 </p>
-                <p className="text-sm text-muted">
-                  {nextChallenge.skill} · {nextChallenge.difficulty} · five test
-                  cases
+<p className="text-sm text-muted">
+                  {nextChallenge.skillName} · {nextChallenge.difficulty} · five
+                  test cases
                 </p>
               </div>
             </div>

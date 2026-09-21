@@ -53,7 +53,7 @@ export function HowItWorks(): ReactElement {
         />
 
         <motion.ol
-          variants={staggerContainer}
+          variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}

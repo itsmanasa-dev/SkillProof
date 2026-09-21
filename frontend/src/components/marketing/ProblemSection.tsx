@@ -27,7 +27,7 @@ export function ProblemSection(): ReactElement {
         />
 
         <motion.div
-          variants={staggerContainer}
+          variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}

@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { Float, Html } from '@react-three/drei'
-import { ThreeEvent } from '@react-three/fiber'
-import { useRef, useState } from 'react'
+import type { ThreeEvent } from '@react-three/fiber'
+import { useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
@@ -109,7 +109,6 @@ export interface SkillGraphSceneProps {
   hoveredId: string | null
   onHover: (id: string | null) => void
   onSelect: (node: SkillGraphNode) => void
-  autoRotate?: boolean
   interactive?: boolean
 }
 
@@ -120,7 +119,6 @@ export function SkillGraphScene({
   hoveredId,
   onHover,
   onSelect,
-  autoRotate = true,
   interactive = true,
 }: SkillGraphSceneProps): ReactElement {
   const nodeById = new Map(nodes.map((node) => [node.id, node]))
@@ -132,50 +130,53 @@ export function SkillGraphScene({
       <pointLight position={[-6, -4, -4]} intensity={90} color="#8b5cf6" />
       <directionalLight position={[0, 4, 8]} intensity={0.5} />
 
-      {edges.map((edge) => {
-        const source = nodeById.get(edge.source)
-        const target = nodeById.get(edge.target)
-        if (!source || !target) return null
-        const active =
-          selectedId === source.id || selectedId === target.id
-        return (
-          <line key={`${edge.source}-${edge.target}`}>
-            <bufferGeometry>
-              <bufferAttribute
-                attach="attributes-position"
-                count={2}
-                array={
-                  new Float32Array([
-                    source.x,
-                    source.y,
-                    source.z,
-                    target.x,
-                    target.y,
-                    target.z,
-                  ])
-                }
-                itemSize={3}
-              />
-            </bufferGeometry>
-            <lineBasicMaterial
-              color={active ? '#ffffff' : '#4e5270'}
-              transparent
-              opacity={active ? 0.7 : 0.28}
-            />
-          </line>
-        )
-      })}
+      <group position={[0, 0, 0]}>
+          {edges.map((edge) => {
+            const source = nodeById.get(edge.source)
+            const target = nodeById.get(edge.target)
+            if (!source || !target) return null
+            const active=
+              selectedId === source.id || selectedId === target.id
+            return (
+              <line key={`${edge.source}-${edge.target}`}>
+                <bufferGeometry args={[]}>
+                  <bufferAttribute
+                    attach="attributes-position"
+                    count={2}
+                    itemSize={3}
+                    args={[
+                      new Float32Array([
+                        source.x,
+                        source.y,
+                        source.z,
+                        target.x,
+                        target.y,
+                        target.z,
+                      ]),
+                      3,
+                    ]}
+                  />
+                </bufferGeometry>
+                <lineBasicMaterial
+                  color={active ? '#ffffff' : '#4e5270'}
+                  transparent
+                  opacity={active ? 0.7 : 0.28}
+                />
+              </line>
+            )
+          })}
 
-      {nodes.map((node) => (
-        <NodeMesh
-          key={node.id}
-          node={node}
-          hoveredId={interactive ? hoveredId : null}
-          selectedId={selectedId}
-          onHover={onHover}
-          onSelect={onSelect}
-        />
-      ))}
-    </>
-  )
-}
+          {nodes.map((node) => (
+            <NodeMesh
+              key={node.id}
+              node={node}
+              hoveredId={interactive ? hoveredId : null}
+              selectedId={selectedId}
+              onHover={onHover}
+              onSelect={onSelect}
+            />
+          ))}
+        </group>
+      </>
+    )
+  }
