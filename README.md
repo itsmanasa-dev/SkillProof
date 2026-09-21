@@ -80,3 +80,5 @@ and shows the backend connection status.
 - When the API changes, update `docs/API_CONTRACT.md`.
 
 See `docs/DEVELOPMENT.md` for the full setup and workflow guide.
+
+
