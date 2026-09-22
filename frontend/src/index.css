@@ -1,31 +1,32 @@
 @import 'tailwindcss';
 
-/* Dark-first SkillProof design system.
-   Colors: near-black charcoal, white/muted-gray type, electric blue + violet accents. */
+/* Technical SkillProof design system.
+   Visual Direction: Charcoal (#11120F) + Acid Lime (#B7D63D) + Bone (#F1EDE2).
+   Engineering tool + Editorial design. No generic AI glows, orbs, or blue/violet gradients. */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --sp-bg: #07070c;
-  --sp-surface: #0d0d15;
-  --sp-surface-2: #12121c;
-  --sp-surface-3: #171724;
-  --sp-overlay: rgba(10, 10, 18, 0.82);
-  --sp-foreground: #f4f4f6;
-  --sp-muted: #a0a0b0;
-  --sp-faint: #6b6b7e;
-  --sp-border: rgba(255, 255, 255, 0.08);
-  --sp-border-strong: rgba(255, 255, 255, 0.14);
-  --sp-primary: #4e7cff;
-  --sp-primary-hover: #3f6bf5;
-  --sp-violet: #8b5cf6;
-  --sp-violet-hover: #7c4bf0;
-  --sp-success: #34d399;
-  --sp-warning: #fbbf24;
-  --sp-destructive: #fb7185;
-  --sp-ring: rgba(78, 124, 255, 0.45);
-  --sp-glow-blue: rgba(78, 124, 255, 0.35);
-  --sp-glow-violet: rgba(139, 92, 246, 0.3);
+  --sp-bg: #11120F;
+  --sp-bg-secondary: #161713;
+  --sp-surface: #1B1C18;
+  --sp-surface-elevated: #22231F;
+  --sp-bone: #F1EDE2;
+  --sp-muted: #96968C;
+  --sp-faint: #5A5A52;
+  --sp-border: #34352E;
+  --sp-border-strong: #4C4E43;
+  --sp-lime: #B7D63D;
+  --sp-lime-secondary: #D0E84B;
+  --sp-success: #22C55E;
+  --sp-error: #EF4444;
+  --sp-warning: #D6A84F;
+
+  /* Semantic mappings & compatibility */
+  --sp-foreground: var(--sp-bone);
+  --sp-primary: var(--sp-lime);
+  --sp-primary-hover: var(--sp-lime-secondary);
+  --sp-ring: rgba(183, 214, 61, 0.5);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -35,44 +36,38 @@
 
 @theme inline {
   --color-background: var(--sp-bg);
+  --color-background-secondary: var(--sp-bg-secondary);
   --color-surface: var(--sp-surface);
-  --color-surface2: var(--sp-surface-2);
-  --color-surface3: var(--sp-surface-3);
-  --color-overlay: var(--sp-overlay);
-  --color-foreground: var(--sp-foreground);
+  --color-surface-elevated: var(--sp-surface-elevated);
+  --color-surface2: var(--sp-bg-secondary);
+  --color-surface3: var(--sp-surface-elevated);
+  --color-foreground: var(--sp-bone);
+  --color-bone: var(--sp-bone);
   --color-muted: var(--sp-muted);
   --color-faint: var(--sp-faint);
   --color-border: var(--sp-border);
   --color-border-strong: var(--sp-border-strong);
-  --color-primary: var(--sp-primary);
-  --color-primary-hover: var(--sp-primary-hover);
-  --color-violet: var(--sp-violet);
-  --color-violet-hover: var(--sp-violet-hover);
+  --color-lime: var(--sp-lime);
+  --color-lime-secondary: var(--sp-lime-secondary);
+  --color-primary: var(--sp-lime);
+  --color-primary-hover: var(--sp-lime-secondary);
   --color-success: var(--sp-success);
+  --color-error: var(--sp-error);
+  --color-destructive: var(--sp-error);
   --color-warning: var(--sp-warning);
-  --color-destructive: var(--sp-destructive);
   --color-ring: var(--sp-ring);
 
-  --font-sans:
-    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
-  --font-mono:
-    'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', Consolas,
-    'Roboto Mono', monospace;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.25rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
 
-  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
-  --shadow-float: 0 12px 40px -12px rgba(0, 0, 0, 0.7);
-
-  --animate-fade-in: fade-in 0.25s ease-out both;
-  --animate-fade-in-up: fade-in-up 0.35s ease-out both;
-  --animate-scale-in: scale-in 0.25s ease-out both;
-  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.2s ease-out both;
+  --animate-fade-in-up: fade-in-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes fade-in {
     from {
@@ -85,30 +80,11 @@
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  @keyframes pulse-soft {
-    0%,
-    100% {
-      opacity: 0.55;
-    }
-    50% {
-      opacity: 1;
     }
   }
 }
@@ -118,22 +94,25 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   background-color: var(--sp-bg);
-  color: var(--sp-foreground);
+  color: var(--sp-bone);
   font-family: var(--font-sans);
-  font-feature-settings:
-    'cv11',
-    'ss01';
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
 }
 
 ::selection {
-  background: rgba(78, 124, 255, 0.32);
-  color: #ffffff;
+  background: var(--sp-lime);
+  color: var(--sp-bg);
 }
 
 * {
@@ -143,116 +122,65 @@ body {
 /* ---- Focus visibility ---- */
 
 :focus-visible {
-  outline: 2px solid var(--sp-ring);
+  outline: 2px solid var(--sp-lime);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 /* ---- Scrollbar ---- */
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--sp-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  border: 2px solid var(--sp-bg);
+  background: var(--sp-border);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--sp-muted);
 }
 
-/* ---- Utilities ---- */
+/* ---- Technical Utilities ---- */
 
-.text-gradient {
-  background-image: linear-gradient(
-    100deg,
-    var(--sp-primary) 0%,
-    #7aa0ff 40%,
-    var(--sp-violet) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.font-display {
+  font-family: var(--font-display);
 }
 
-.text-gradient-soft {
-  background-image: linear-gradient(180deg, #ffffff 30%, var(--sp-muted) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.font-mono {
+  font-family: var(--font-mono);
 }
 
-.bg-glow {
-  background:
-    radial-gradient(
-      60% 60% at 20% 0%,
-      rgba(78, 124, 255, 0.14),
-      transparent 60%
-    ),
-    radial-gradient(
-      50% 50% at 80% 100%,
-      rgba(139, 92, 246, 0.1),
-      transparent 60%
-    );
-}
-
-.grid-bg {
+.tech-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(
-    70% 70% at 50% 30%,
-    black 30%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(70% 70% at 50% 30%, black 30%, transparent 100%);
+    linear-gradient(to right, rgba(52, 53, 46, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 53, 46, 0.4) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.tech-crosshair {
+  position: relative;
+}
+.tech-crosshair::before,
+.tech-crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--sp-lime);
+}
+
+.lime-highlight {
+  color: var(--sp-lime);
+}
+
+.card-technical {
+  background-color: var(--sp-surface);
   border: 1px solid var(--sp-border);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
-
-.card-gradient {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015))
-    0 0 / 100% 100%,
-    var(--sp-surface);
-}
-
-.card-hover {
-  transition:
-    border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-.card-hover:hover {
-  border-color: var(--sp-border-strong);
-  box-shadow: 0 16px 48px -20px rgba(0, 0, 0, 0.75);
-}
-
-.ring-glow {
-  box-shadow:
-    0 0 0 1px rgba(78, 124, 255, 0.35),
-    0 0 32px -6px var(--sp-glow-blue);
-}
-
-.divider-gradient {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.14),
-    transparent
-  );
+.card-technical:hover {
+  border-color: var(--sp-lime);
 }
 
 @media (prefers-reduced-motion: reduce) {

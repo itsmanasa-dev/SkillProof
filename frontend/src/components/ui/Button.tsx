@@ -5,9 +5,11 @@ import { cn } from '@/lib/cn'
 
 export type ButtonVariant =
   | 'primary'
-  | 'violet'
+  | 'secondary'
   | 'outline'
   | 'ghost'
+  | 'success'
+  | 'error'
   | 'destructive'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
@@ -16,52 +18,67 @@ export interface ButtonProps
   extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: ButtonVariant
   size?: ButtonSize
+  loading?: boolean
   children: ReactNode
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary text-white hover:bg-primary-hover shadow-[0_0_0_1px_rgba(78,124,255,0.35),0_8px_24px_-10px_var(--sp-glow-blue)]',
-  violet:
-    'bg-violet text-white hover:bg-violet-hover shadow-[0_8px_24px_-10px_var(--sp-glow-violet)]',
+    'bg-[#B7D63D] text-[#11120F] font-semibold hover:bg-[#D0E84B] border border-transparent shadow-none',
+  secondary:
+    'bg-transparent text-[#F1EDE2] border border-[#34352E] hover:border-[#F1EDE2] hover:bg-[#1B1C18]',
   outline:
-    'border border-border-strong bg-surface-2/60 text-foreground hover:bg-surface-3 hover:border-faint',
+    'bg-transparent text-[#F1EDE2] border border-[#34352E] hover:border-[#F1EDE2] hover:bg-[#1B1C18]',
   ghost:
-    'bg-transparent text-muted hover:text-foreground hover:bg-white/5',
+    'group bg-transparent text-[#96968C] hover:text-[#F1EDE2] border border-transparent',
+  success:
+    'bg-[#22C55E]/15 text-[#22C55E] border border-[#22C55E]/40 hover:bg-[#22C55E]/25',
+  error:
+    'bg-[#EF4444]/15 text-[#EF4444] border border-[#EF4444]/40 hover:bg-[#EF4444]/25',
   destructive:
-    'bg-destructive/15 text-destructive hover:bg-destructive/25',
+    'bg-[#EF4444]/15 text-[#EF4444] border border-[#EF4444]/40 hover:bg-[#EF4444]/25',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-sm',
-  md: 'h-10 px-4 text-sm',
-  lg: 'h-12 px-6 text-base',
+  sm: 'h-8 px-3 text-xs tracking-wide uppercase font-mono',
+  md: 'h-10 px-4 text-sm font-medium',
+  lg: 'h-12 px-6 text-sm md:text-base font-medium',
 }
 
 export function Button({
   variant = 'primary',
   size = 'md',
+  loading = false,
   className = '',
   type = 'button',
   children,
+  disabled,
   ...props
 }: ButtonProps): ReactElement {
   return (
     <motion.button
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+      whileHover={disabled || loading ? undefined : { y: -1 }}
+      whileTap={disabled || loading ? undefined : { y: 0 }}
+      transition={{ duration: 0.15, ease: 'easeOut' }}
       type={type}
+      disabled={disabled || loading}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-medium tracking-tight',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-        'disabled:pointer-events-none disabled:opacity-50',
+        'relative inline-flex items-center justify-center gap-2 rounded-none transition-colors duration-150',
+        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B7D63D] focus-visible:ring-offset-1 focus-visible:ring-offset-[#11120F]',
+        'disabled:pointer-events-none disabled:opacity-40 select-none cursor-pointer',
         variantClasses[variant],
         sizeClasses[size],
         className,
       )}
       {...props}
     >
+      {loading && (
+        <span className="inline-flex items-center gap-1" aria-label="Loading">
+          <span className="h-1.5 w-1.5 animate-pulse bg-current" />
+          <span className="h-1.5 w-1.5 animate-pulse bg-current [animation-delay:150ms]" />
+          <span className="h-1.5 w-1.5 animate-pulse bg-current [animation-delay:300ms]" />
+        </span>
+      )}
       {children}
     </motion.button>
   )
