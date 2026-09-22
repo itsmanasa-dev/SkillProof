@@ -11,6 +11,7 @@ export type ButtonVariant =
   | 'success'
   | 'error'
   | 'destructive'
+  | 'violet'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
@@ -37,6 +38,8 @@ const variantClasses: Record<ButtonVariant, string> = {
     'bg-[#EF4444]/15 text-[#EF4444] border border-[#EF4444]/40 hover:bg-[#EF4444]/25',
   destructive:
     'bg-[#EF4444]/15 text-[#EF4444] border border-[#EF4444]/40 hover:bg-[#EF4444]/25',
+  violet:
+    'bg-transparent text-[#B7D63D] border border-[#B7D63D]/40 hover:bg-[#B7D63D]/10 hover:border-[#B7D63D]',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
